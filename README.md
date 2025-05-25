@@ -1,105 +1,27 @@
-# 🚀🗂️ Launch Doc
+# DashboardApp
 
-**Launch Doc** is a sleek, modern dashboard web app designed to serve as a centralized launchpad for your frequently used tools, apps, and websites. It allows you to organize shortcuts under customizable tabs, export/import data, and personalize the interface with a clean UI.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
 
-> _“A launching point for tools, apps, or sites from one centralized location”_
+## Development server
 
----
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## 🌟 Features
+## Code scaffolding
 
-### 🔖 Tabs & Shortcuts
-- Create, rename, delete, and reorder tabs via drag-and-drop (Angular CDK).
-- Add shortcuts (URLs) to tabs with custom icons and titles.
-- Drag-and-drop to reorder shortcuts within a tab.
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-### ⚙️ Settings Menu
-- Toggle background gradient themes via a dropdown Settings menu.
-- Easily extendable for additional customization options.
+## Build
 
-### 🗃️ Data Management
-- Export your entire dashboard configuration (tabs and shortcuts) as a JSON file.
-- Import a previously saved configuration file to restore your setup.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-### 👤 User Profile
-- Displays user avatar and name in the top-right corner.
-- Ready for extension into full authentication.
+## Running unit tests
 
----
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## 🛠️ Tech Stack
+## Running end-to-end tests
 
-- **Angular 17+**
-- **Angular CDK DragDrop** for drag-and-drop functionality
-- **HTML & SCSS** for styling
-- **Local Storage** for persistent data
-- **Responsive Design** – usable on desktop and mobile
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
----
+## Further help
 
-## 📂 Project Structure
-src/
-├── app/
-│ ├── components/
-│ ├── models/
-│ ├── services/
-│ └── app.component.ts / html / scss
-├── assets/
-├── environments/
-└── index.html
-
----
-
-## 📸 Screenshots
-
-| Tabs & Shortcuts | Settings Menu |
-|------------------|---------------|
-| ![tabs](screenshots/tabs.png) | ![settings](screenshots/settings.png) |
-
----
-
-## 🚀 Getting Started
-
-1. Clone the repo:
-
-   ```bash
-   git clone https://github.com/yourusername/launch-doc.git
-   cd launch-doc
-
----
-
-## Installation & Run
- ### Install Dependency
-```npm install```
-
-### Run the app
-```ng serve```
-
-### Visit http://localhost:4200
-
----
-
-## ✨ Customization
-To add more setting options (like font size, theme, etc.), extend the settings dropdown.
-
-To persist user profiles, integrate with Firebase Auth or your preferred auth system.
-
----
-
-## 🙌 Acknowledgements
-Icons and emoji provided by:
-
-[Twemoji](https://twemoji.twitter.com/)
-[Heroicons](https://heroicons.com/)
-
----
-
-## 🧠 Fun Fact
-Built to reduce bookmark clutter and improve productivity by centralizing the launch of all your important tools ✨
-
----
-
-## 📄 License
-MIT © 2025 [launchdock]
-
-
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

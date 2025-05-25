@@ -1,0 +1,249 @@
+body {
+  font-family: 'Inter', sans-serif;
+  /* background-color: #f0f2f5; */
+  margin: 0;
+  background: linear-gradient(to right, #71e6ed, #a57efd);
+}
+
+.header {
+  /* background-color: white; */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: transparent;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #0a0a0a; /* indigo-600 */
+  margin: 0;
+}
+.logo:hover {
+  color: #5e60ce; /* Choose your highlight color */
+  transform: scale(1.05);
+}
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* or center, depending on design */
+}
+
+.tagline {
+  font-size: 0.75rem;
+  font-style: italic;
+  font-family: 'Courier New', monospace;
+  color: #2161f7;
+  margin: 0;
+  font-weight: bold;
+}
+
+.settings-btn {
+  background: none;
+  border: none;
+  color: #4b5563;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.settings-btn:hover {
+  color: #4f46e5;
+}
+
+
+.main-container {
+  padding: 0 24px 48px;  
+  margin: 0 auto;
+  margin-right: 20px;
+  margin-left: 50px;
+}
+
+/* .section-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 24px;
+} */
+
+.shortcut-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+  padding:16px;
+}
+
+.shortcut-card {
+  background-color: #2424241a;
+  padding: 15px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.shortcut-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+}
+
+.shortcut-card p {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.icon-placeholder {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  color: white;
+  margin-left: 31px;
+}
+.export-button {
+  background-color: #007bff; /* Bootstrap blue */
+  color: white;
+  padding: 5px 10px;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+  margin:0px 5px;
+  margin-top: 5px;
+}
+
+.export-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.03);
+}
+
+.export-button:active {
+  transform: scale(0.98);
+}
+
+/* Color background helpers */
+.bg-red { background-color: #ef4444; }
+.bg-blue { background-color: #3b82f6; }
+.bg-green { background-color: #10b981; }
+.bg-yellow { background-color: #f59e0b; }
+.bg-purple { background-color: #8b5cf6; }
+.bg-pink { background-color: #ec4899; }
+.bg-teal { background-color: #14b8a6; }
+.bg-gray { background-color: #6b7280; }
+.bg-orange { background-color: #f97316; }
+.bg-lime { background-color: #84cc16; }
+.bg-cyan { background-color: #06b6d4; }
+.bg-fuchsia { background-color: #d946ef; }
+
+/* Optional hover bg helpers */
+.hover-email:hover { background-color: #eef2ff; }
+.hover-blue:hover { background-color: #eff6ff; }
+/* Add similar hover backgrounds if needed */
+
+/* Container for tabs */
+.tab-bar {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 2px solid #ddd;
+  
+}
+
+/* Each tab item */
+.tab {
+  padding: 0px 10px;
+  background-color: #ffffff82;;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.tab:hover {
+  background-color: #d5d5d5;
+}
+
+/* Active tab */
+.tab.active {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Buttons inside tabs (Edit, Delete) */
+.tab button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 0px;
+  color: #333;
+}
+
+.tab button:hover {
+  color: #ff3333;
+}
+
+/* Global button styles */
+button {
+  background-color: #0202021c;
+  color: white;
+  border: none;
+  padding: 5px 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.tab-container {
+  padding: 16px;  
+  margin: auto;
+}
+.shortcut-card h3 {
+  max-width: 120px; /* adjust as needed */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.custom-file-upload input[type="file"] {
+  display: none;
+}

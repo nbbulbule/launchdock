@@ -1,0 +1,74 @@
+<!--START:TAB HEADERS -->
+<header class="header">
+  <div class="header-container">
+ 
+<div class="title-container">
+  <h1 class="logo" title="A launching point for tools, apps, or sites from one centralized location">
+    🚀  {{ title }}
+  </h1>
+  <!-- 🗂️ -->
+  <p class="tagline">
+    {{tagline}}
+  </p>
+</div>
+    <div class="header-actions">      
+      <!-- Settings Button -->
+      <div class="settings-dropdown-container">
+        <button class="export-button" (click)="toggleSettingsMenu()" title="Settings">⚙️</button>
+
+        <!-- Dropdown Menu -->
+        <div class="settings-dropdown" *ngIf="showSettingsMenu">
+          <button class="export-button" (click)="exportToJsonFile()" title="Download Local Storage Data">📤 Export
+            Data</button>
+          <button class="export-button" (click)="toggleBackgroundColor()">Toggle Body Background</button>         
+          <label class="custom-file-upload"> 📥 Import Data
+            <input type="file" (change)="importFromJsonFile($event)" accept=".json" />
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</header>
+<!--END:TAB HEADERS -->
+
+<!-- START: Tab section -->
+<div class="tab-container">
+  <div class="tab-bar" cdkDropList [cdkDropListData]="tabs" (cdkDropListDropped)="dropTab($event)">
+    <div *ngFor="let tab of tabs; let i = index" class="tab" [class.active]="tab.id === activeTabId" cdkDrag
+      (click)="selectTab(tab.id)">
+      <div cdkDragHandle class="tab-label">
+        {{ tab.name }}
+
+        <button (click)="editTab(tab); $event.stopPropagation()">✏️</button>
+        <button *ngIf="tab.shortcuts.length === 0" (click)="deleteTab(tab.id); $event.stopPropagation()">🗑️</button>
+      </div>
+    </div>
+    <button (click)="addTab()">➕ Add Tab</button>
+  </div>
+
+</div>
+<!-- END: Tab section -->
+
+<!--START: Shortcut section -->
+<div class="shortcut-grid" *ngIf="activeTab" cdkDropList [cdkDropListData]="activeTab.shortcuts"
+  (cdkDropListDropped)="dropShortcut($event)">
+  <div class="shortcut-card hover-blue" *ngFor="let shortcut of activeTab.shortcuts" cdkDrag>
+    <div cdkDragHandle>
+      <a [href]="shortcut.url" target="_blank" (click)="$event.stopPropagation()" title="{{ shortcut.url }}">
+        <div class="icon-placeholder bg-green">
+          <img [src]="shortcut.favicon || getFavicon(shortcut.url)" width="32" height="32" alt="favicon" />
+        </div>
+        <h5>{{ shortcut.title }}</h5>
+        <p>Visit website</p>
+      </a>
+    </div>
+    <button (click)="deleteUrl(shortcut.url); $event.stopPropagation(); $event.preventDefault();" title="Delete">
+      🗑️
+    </button>
+  </div>
+
+  <button (click)="addShortcutToActiveTab()">+ Add Shortcut</button>
+</div>
+<!--END: Shortcut section -->
