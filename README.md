@@ -6,8 +6,23 @@
 
 ---
 
-## 🌟 Features
+### Add app as browser extension (Run project and add)
+Follow article [Click here](https://infolink.hashnode.dev/steps-to-convert-an-angular-app-into-a-browser-extension)
 
+### Add app as browser extension (download and add)
+> This is angular project where you can clone and run on local
+> If you are not aware about angular build/run and want to use extension to browser (Jiosphere/Chrome/Edge) directly then follow steps
+#### Follow steps
+- Download folder and save on your machine ➡️ [Click Here]()
+- Load as Chrome Extension
+- Open Chrome
+- Go to: chrome://extensions
+- Enable Developer Mode (top right)
+- Click “Load unpacked”
+- Select downloaded folder from your machine
+🎉 Now, every time you open a new tab, your Angular app will open.
+
+## 🌟 Features
 ### 🔖 Tabs & Shortcuts
 - Create, rename, delete, and reorder tabs via drag-and-drop (Angular CDK).
 - Add shortcuts (URLs) to tabs with custom icons and titles.
