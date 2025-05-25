@@ -38,7 +38,6 @@
 ---
 
 ## 📂 Project Structure
-
 src/
 ├── app/
 │ ├── components/
