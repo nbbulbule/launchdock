@@ -38,6 +38,7 @@
 ---
 
 ## 📂 Project Structure
+
 src/
 ├── app/
 │ ├── components/
@@ -54,7 +55,7 @@ src/
 
 | Tabs & Shortcuts | Settings Menu |
 |------------------|---------------|
-| ![tabs](screenshots/tabs.png) | ![settings](screenshots/settings.png) |
+| ![tabs](screenshots/tabs_shortcuts.jpg) | ![settings](screenshots/settings.jpg) |
 
 ---
 
