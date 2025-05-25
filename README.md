@@ -9,11 +9,12 @@
 ### Add app as browser extension (Run project and add)
 Follow article [Click here](https://infolink.hashnode.dev/steps-to-convert-an-angular-app-into-a-browser-extension)
 
+
 ### Add app as browser extension (download and add)
 > This is angular project where you can clone and run on local
 > If you are not aware about angular build/run and want to use extension to browser (Jiosphere/Chrome/Edge) directly then follow steps
 #### Follow steps
-- Download folder and save on your machine ➡️ [Click Here](https://github.com/nbbulbule/launchdock/blob/main/extension_Versions/LaunchDock_Extension%20V1.rar)
+- Download folder and save on your machine ➡️ [Click Here](https://github.com/nbbulbule/launchdock/blob/main/extension_Versions/LaunchDock_Extension%20V1.rar){target="_blank"}
 - Load as Chrome Extension
 - Open Chrome
 - Go to: chrome://extensions
@@ -111,8 +112,8 @@ To persist user profiles, integrate with Firebase Auth or your preferred auth sy
 ## 🙌 Acknowledgements
 Icons and emoji provided by:
 
-[Twemoji](https://twemoji.twitter.com/)
-[Heroicons](https://heroicons.com/)
+[Twemoji](https://twemoji.twitter.com/){target="_blank"}
+[Heroicons](https://heroicons.com/){target="_blank"}
 
 ---
 
