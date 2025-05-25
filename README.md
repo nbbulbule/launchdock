@@ -112,8 +112,8 @@ To persist user profiles, integrate with Firebase Auth or your preferred auth sy
 ## 🙌 Acknowledgements
 Icons and emoji provided by:
 
-[Twemoji](https://twemoji.twitter.com/){target="_blank"}
-[Heroicons](https://heroicons.com/){target="_blank"}
+[Twemoji](https://twemoji.twitter.com/)
+[Heroicons](https://heroicons.com/)
 
 ---
 
