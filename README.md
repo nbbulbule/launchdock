@@ -14,7 +14,7 @@ Follow article [Click here](https://infolink.hashnode.dev/steps-to-convert-an-an
 > This is angular project where you can clone and run on local
 > If you are not aware about angular build/run and want to use extension to browser (Jiosphere/Chrome/Edge) directly then follow steps
 #### Follow steps
-- Download folder and save on your machine ➡️ [Click Here](https://github.com/nbbulbule/launchdock/blob/main/extension_Versions/LaunchDock_Extension%20V1.rar){target="_blank"}
+- Download folder and save on your machine ➡️ [Click Here](https://github.com/nbbulbule/launchdock/blob/main/extension_Versions/LaunchDock_Extension%20V1.rar)
 - Load as Chrome Extension
 - Open Chrome
 - Go to: chrome://extensions
