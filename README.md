@@ -40,12 +40,19 @@
 ## 📂 Project Structure
 src/
 ├── app/
+
 │ ├── components/
+
 │ ├── models/
+
 │ ├── services/
+
 │ └── app.component.ts / html / scss
+
 ├── assets/
+
 ├── environments/
+
 └── index.html
 
 ---
