@@ -77,7 +77,7 @@ src/
 
 | Tabs & Shortcuts | Settings Menu |
 |------------------|---------------|
-| ![tabs](screenshots/tabs_shortcuts.jpg) | ![settings](screenshots/settings.jpg) |
+| ![tabs](screenshots/image.png) | ![settings](screenshots/settings.jpg) |
 
 ---
 
