@@ -103,9 +103,9 @@ src/
 ---
 
 ## ✨ Customization
-To add more setting options (like font size, theme, etc.), extend the settings dropdown.
+- To add more setting options (like font size, theme, etc.), extend the settings dropdown.
 
-To persist user profiles, integrate with Firebase Auth or your preferred auth system.
+- To persist user profiles, integrate with Firebase Auth or your preferred auth system.
 
 ---
 
@@ -113,58 +113,58 @@ To persist user profiles, integrate with Firebase Auth or your preferred auth sy
 
 This section of the application provides dedicated tabs for integrating Google Calendar and Google Tasks. Due to Google's security policies and the nature of embedding, direct full integration requires specific steps or API usage.
 
-1. Google Calendar Integration
-The "Calendar" tab in the Google Services section uses an <iframe> to embed your personal Google Calendar. For this to work, you need to obtain a special embed URL from your Google Calendar settings.
+### 1. Google Calendar Integration
+- The "Calendar" tab in the Google Services section uses an <iframe> to embed your personal Google Calendar. For this to work, you need to obtain a special embed URL from your Google Calendar settings.
 
-Steps to get your Personal Google Calendar Embed URL:
+- Steps to get your Personal Google Calendar Embed URL:
 
-Open Google Calendar on your Desktop Computer:
+- Open Google Calendar on your Desktop Computer:
 
-Go to: https://calendar.google.com/
+- Go to: https://calendar.google.com/
 
-Ensure you are logged into the Google Account that owns the calendar you want to embed.
+- Ensure you are logged into the Google Account that owns the calendar you want to embed.
 
-Access Calendar Settings:
+#### Access Calendar Settings:
 
-On the left sidebar, find the section titled "My calendars". You might need to click the Menu icon (three horizontal lines ☰) in the top left corner to expand the sidebar if it's hidden.
+- On the left sidebar, find the section titled "My calendars". You might need to click the Menu icon (three horizontal lines ☰) in the top left corner to expand the sidebar if it's hidden.
 
-Hover over the specific calendar you want to embed (e.g., your primary calendar, or a custom calendar where you manage events/tasks).
+- Hover over the specific calendar you want to embed (e.g., your primary calendar, or a custom calendar where you manage events/tasks).
 
-Click the three vertical dots (⋮) that appear next to the calendar name when you hover.
+- Click the three vertical dots (⋮) that appear next to the calendar name when you hover.
 
-From the dropdown menu, select "Settings and sharing".
+- From the dropdown menu, select "Settings and sharing".
 
-Locate "Integrate calendar":
+- Locate "Integrate calendar":
 
-On the left-hand menu within the settings, click on "Integrate calendar".
+- On the left-hand menu within the settings, click on "Integrate calendar".
 
-Customize and Get the Embed Code:
+#### Customize and Get the Embed Code:
 
-In the "Integrate calendar" section, you'll see an <iframe> embed code.
+- In the "Integrate calendar" section, you'll see an <iframe> embed code.
 
-Crucially, below this embed code, click the "Customize" button. A new page or pop-up will open with customization options.
+- Crucially, below this embed code, click the "Customize" button. A new page or pop-up will open with customization options.
 
-Configure Display Options:
+#### Configure Display Options:
 
-On the left side of this customization tool, you'll see a list of your calendars under "Calendars to display". Ensure the checkbox next to your primary calendar (and any other calendars whose events you want to see) is ticked.
+- On the left side of this customization tool, you'll see a list of your calendars under "Calendars to display". Ensure the checkbox next to your primary calendar (and any other calendars whose events you want to see) is ticked.
 
-Note on Tasks: Google Tasks with due dates will appear on your main Google Calendar if your "Tasks" calendar is enabled for display in your regular Calendar view. The embed tool itself does not offer "Tasks" as a separate, distinct calendar to embed.
+- Note on Tasks: Google Tasks with due dates will appear on your main Google Calendar if your "Tasks" calendar is enabled for display in your regular Calendar view. The embed tool itself does not offer "Tasks" as a separate, distinct calendar to embed.
 
-Adjust other settings like the Default View (e.g., "Day" for a daily view), width, height, colors, and navigation buttons as desired.
+- Adjust other settings like the Default View (e.g., "Day" for a daily view), width, height, colors, and navigation buttons as desired.
 
-Copy the Updated src URL:
+#### Copy the Updated src URL:
 
-As you make changes, the <iframe> code at the very top of this customization page will update dynamically.
+- As you make changes, the <iframe> code at the very top of this customization page will update dynamically.
 
-Copy only the URL within the src="..." attribute of this updated <iframe> code. It will be a long URL.
+- Copy only the URL within the src="..." attribute of this updated <iframe> code. It will be a long URL.
 
-Paste into your Angular Component:
+#### Paste into your Angular Component:
 
-Open src/app/google-service/google-service.component.html.
+- Open src/app/google-service/google-service.component.html.
 
-Locate the <iframe> tag within the mat-tab label="Calendar".
+- Locate the <iframe> tag within the mat-tab label="Calendar".
 
-Replace the placeholder src URL with the customized URL you just copied from Google Calendar.
+- Replace the placeholder src URL with the customized URL you just copied from Google Calendar.
 
 <iframe
   src="PASTE_YOUR_LONG_CUSTOMIZED_GOOGLE_CALENDAR_EMBED_URL_HERE"
@@ -176,28 +176,28 @@ Replace the placeholder src URL with the customized URL you just copied from Goo
   title="Google Calendar Embed"
 ></iframe>
 
-Save the file.
+#### Save the file.
 
-2. Google Tasks Integration
+### 2. Google Tasks Integration
 The "Tasks" tab provides a direct link to Google Tasks due to embedding limitations.
 
-Explanation of Tasks Embedding:
+#### Explanation of Tasks Embedding:
 
-Direct Embedding Limitations: Directly embedding the full, interactive Google Tasks interface (https://tasks.google.com/) into an <iframe> on external domains (like this application) is generally prevented by browser security policies (specifically, the X-Frame-Options or Content-Security-Policy headers set by Google). This is to prevent clickjacking and other security vulnerabilities.
+- Direct Embedding Limitations: Directly embedding the full, interactive Google Tasks interface (https://tasks.google.com/) into an <iframe> on external domains (like this application) is generally prevented by browser security policies (specifically, the X-Frame-- -- -Options or Content-Security-Policy headers set by Google). This is to prevent clickjacking and other security vulnerabilities.
 
-API for Full Control: For a truly integrated and interactive Google Tasks experience (e.g., showing task lists, adding/editing tasks directly within the app), you would need to utilize the Google Tasks API. This involves:
+- API for Full Control: For a truly integrated and interactive Google Tasks experience (e.g., showing task lists, adding/editing tasks directly within the app), you would need to utilize the Google Tasks API. This involves:
 
-Creating a project in the Google Cloud Platform.
+- Creating a project in the Google Cloud Platform.
 
-Enabling the Google Tasks API.
+- Enabling the Google Tasks API.
 
-Implementing OAuth 2.0 for user authentication and authorization.
+- Implementing OAuth 2.0 for user authentication and authorization.
 
-Writing Angular code to make API calls to fetch, create, update, and delete tasks, then rendering them dynamically in your component. This is a significantly more complex development task.
+- Writing Angular code to make API calls to fetch, create, update, and delete tasks, then rendering them dynamically in your component. This is a significantly more complex development task.
 
-Current Implementation:
+#### Current Implementation:
 
-The "Tasks" tab currently offers a convenient link to open Google Tasks in a new browser tab for quick access. This avoids the security limitations of iframes.
+- The "Tasks" tab currently offers a convenient link to open Google Tasks in a new browser tab for quick access. This avoids the security limitations of iframes.
 
 <a href="https://tasks.google.com/" target="_blank" class="google-action-button">Open Google Tasks</a>
 
