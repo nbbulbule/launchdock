@@ -1,17 +1,37 @@
+/* Universal font-family (Inter or similar sans-serif) */
 body {
   font-family: 'Inter', sans-serif;
-  /* background-color: #f0f2f5; */
   margin: 0;
+  min-height: 100vh; /* Ensure body takes full viewport height */
+  display: flex; /* Use flexbox for body to make app-container fill it */
+  flex-direction: column; /* Stack children vertically */
+  transition: background 0.3s ease-in-out; /* Smooth transition for background changes */
+}
+
+/* Background gradients for body */
+.body-background-gradient-a {
   background: linear-gradient(to right, #71e6ed, #a57efd);
 }
 
+.body-background-gradient-b {
+  background: linear-gradient(to right, #a57efd, #71e6ed); /* Reversed gradient */
+}
+
+/* Main App Container - will implicitly fill body due to body's flex properties */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the container itself takes at least full viewport height */
+  width: 100%;
+}
+
+/* Header Styles (from your original code, moved to AppComponent) */
 .header {
-  /* background-color: white; */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: transparent;
+  background: transparent; /* Keep header background transparent */
 }
 
 .header-container {
@@ -24,17 +44,20 @@ body {
 .logo {
   font-size: 28px;
   font-weight: bold;
-  color: #0a0a0a; /* indigo-600 */
+  color: #0a0a0a;
   margin: 0;
+  transition: color 0.2s, transform 0.2s;
 }
+
 .logo:hover {
-  color: #5e60ce; /* Choose your highlight color */
+  color: #5e60ce;
   transform: scale(1.05);
 }
+
 .title-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* or center, depending on design */
+  align-items: flex-start;
 }
 
 .tagline {
@@ -46,63 +69,152 @@ body {
   font-weight: bold;
 }
 
-.settings-btn {
-  background: none;
+/* Settings Dropdown Styles (from your original code) */
+.settings-dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.settings-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  z-index: 1000;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px; /* Added for consistency */
+}
+
+.settings-dropdown button {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  background-color: #007bff;
+  color: white;
+  padding: 5px 10px;
+  font-size: 15px;
+  font-weight: 500;
   border: none;
-  color: #4b5563;
-  font-size: 20px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
 }
 
-.settings-btn:hover {
-  color: #4f46e5;
+.settings-dropdown button:hover {
+  background-color: #0056b3;
+  transform: scale(1.03);
 }
 
-
-.main-container {
-  padding: 0 24px 48px;  
-  margin: 0 auto;
-  margin-right: 20px;
-  margin-left: 50px;
+.settings-dropdown button:active {
+  transform: scale(0.98);
 }
 
-/* .section-title {
-  font-size: 24px;
-  font-weight: 600;
-  color: #374151;
-  margin-bottom: 24px;
-} */
-
-.shortcut-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 10px;
-  padding:16px;
+.custom-file-upload {
+  display: block; /* Changed to block for full width in dropdown */
+  width: 100%; /* Ensure it takes full width */
+  text-align: center; /* Center text */
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border-radius: 8px; /* Consistent border-radius */
+  font-size: 15px; /* Consistent font-size */
+  margin-top: 4px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
 }
 
-.shortcut-card {
-  background-color: #2424241a;
-  padding: 15px;
-  border-radius: 16px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  transition: transform 0.2s, box-shadow 0.2s;
-  text-decoration: none;
-  color: inherit;
+.custom-file-upload:hover {
+  background-color: #0056b3;
+  transform: scale(1.03);
 }
 
-.shortcut-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+.custom-file-upload input[type="file"] {
+  display: none;
 }
 
-.shortcut-card p {
-  font-size: 12px;
-  color: #6b7280;
-  margin: 0;
+/* General button styles (apply to all buttons, can be overridden by specific component styles) */
+button {
+  background-color: #0202021c;
+  color: white;
+  border: none;
+  padding: 5px 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
 }
 
-.icon-placeholder {
+button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Main Layout for Desktop (Default) */
+.main-layout {
+  display: flex;
+  flex: 1; /* Allows it to take remaining vertical space */
+  padding: 5px;
+  gap: 5px; /* Space between left and right panels */
+}
+
+.left-panel {
+  flex: 7; /* 70% width */
+  box-sizing: border-box;
+  background-color: #ffffff82; /* Slightly translucent white background */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 16px; /* Added padding inside panel */
+  overflow: hidden; /* Hide overflow from inner components */
+}
+
+.right-panel {
+  flex: 3; /* 30% width */
+  display: flex;
+  flex-direction: column; /* Stack right panels vertically */
+  gap: 20px; /* Space between the two right panels */
+  box-sizing: border-box;
+}
+
+.right-panel-item {
+  flex: 1; /* Each item takes half of the right panel's height */
+  background-color: #ffffff82; /* Slightly translucent white background */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 4px; /* Added padding inside panel */
+  overflow-y: auto; /* Allow scrolling if content overflows */  
+  
+}
+
+/* Mobile Layout (less than 960px or specific handset/small breakpoints) */
+@media (max-width: 959.98px) { /* Adjust breakpoint as needed, matching Breakpoints.WebPortrait etc. */
+  .main-layout.mobile-layout {
+    flex-direction: column; /* Stack panels vertically */
+    padding: 15px; /* Adjust padding for smaller screens */
+    gap: 15px;
+  }
+
+  .main-layout.mobile-layout .left-panel,
+  .main-layout.mobile-layout .right-panel {
+    width: 100%; /* Take full width */
+    flex: none; /* Remove flex sizing */
+  }
+
+  .main-layout.mobile-layout .right-panel {
+    flex-direction: column; /* Ensure vertical stacking for categories/google services */
+    gap: 15px; /* Adjust gap for mobile */
+  }
+}
+
+/* General utility classes */
+.icon-placeholder { /* Moved from original app.component.css */
   width: 48px;
   height: 48px;
   display: flex;
@@ -114,31 +226,13 @@ body {
   color: white;
   margin-left: 31px;
 }
-.export-button {
-  background-color: #007bff; /* Bootstrap blue */
-  color: white;
-  padding: 5px 10px;
-  font-size: 15px;
-  font-weight: 500;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
-  margin:0px 5px;
-  margin-top: 5px;
+.shortcut-card h3 { /* Moved from original app.component.css */
+  max-width: 120px; /* adjust as needed */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
-.export-button:hover {
-  background-color: #0056b3;
-  transform: scale(1.03);
-}
-
-.export-button:active {
-  transform: scale(0.98);
-}
-
-/* Color background helpers */
+/* Color background helpers (from original app.component.css) */
 .bg-red { background-color: #ef4444; }
 .bg-blue { background-color: #3b82f6; }
 .bg-green { background-color: #10b981; }
@@ -152,119 +246,7 @@ body {
 .bg-cyan { background-color: #06b6d4; }
 .bg-fuchsia { background-color: #d946ef; }
 
-/* Optional hover bg helpers */
+/* Optional hover bg helpers (from original app.component.css) */
 .hover-email:hover { background-color: #eef2ff; }
 .hover-blue:hover { background-color: #eff6ff; }
-/* Add similar hover backgrounds if needed */
 
-/* Container for tabs */
-.tab-bar {
-  display: flex;
-  gap: 10px;
-  padding: 10px;
-  border-bottom: 2px solid #ddd;
-  
-}
-
-/* Each tab item */
-.tab {
-  padding: 0px 10px;
-  background-color: #ffffff82;;
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative;
-  font-weight: 500;
-  transition: background-color 0.2s;
-}
-
-.tab:hover {
-  background-color: #d5d5d5;
-}
-
-/* Active tab */
-.tab.active {
-  background-color: #007bff;
-  color: white;
-}
-
-/* Buttons inside tabs (Edit, Delete) */
-.tab button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  margin-left: 0px;
-  color: #333;
-}
-
-.tab button:hover {
-  color: #ff3333;
-}
-
-/* Global button styles */
-button {
-  background-color: #0202021c;
-  color: white;
-  border: none;
-  padding: 5px 5px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.2s;
-  
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-.tab-container {
-  padding: 16px;  
-  margin: auto;
-}
-.shortcut-card h3 {
-  max-width: 120px; /* adjust as needed */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.custom-file-upload {
-  display: inline-block;
-  padding: 6px 12px;
-  cursor: pointer;
-  background-color: #007bff;
-  color: white;
-  border-radius: 4px;
-  font-size: 14px;
-  margin-top: 4px;
-}
-
-.custom-file-upload input[type="file"] {
-  display: none;
-}
-.settings-dropdown-container {
-  /* position: relative; */
-  display: inline-block;
-}
-
-.settings-dropdown {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: white;
-  border: 1px solid #ccc;
-  padding: 0.5rem;
-  z-index: 1000;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.settings-dropdown button{
-  display: block;
-  width: 100%;
-  margin-top: 0.25rem;
-}

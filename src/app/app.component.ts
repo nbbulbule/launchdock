@@ -1,241 +1,158 @@
-import { Component,Renderer2 } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { CdkDragDrop, moveItemInArray,DragDropModule } from '@angular/cdk/drag-drop';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
+import { BreakpointObserver, Breakpoints, LayoutModule } from '@angular/cdk/layout';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { CommonModule } from '@angular/common'; // For *ngIf
 
+// Import standalone components used in this template
+import { ShortTabComponent } from './short-tab/short-tab.component';
+import { MyListComponent } from './my-list/my-list.component';
+import { GoogleServiceComponent } from './google-service/google-service.component';
+
+// Define local storage keys
+const SHORT_TAB_STORAGE_KEY = 'tabData-dev';
+const MY_LIST_STORAGE_KEY = 'myListData';
 
 @Component({
   selector: 'app-root',
-  standalone: true,  
-  imports: [RouterOutlet, CommonModule, FormsModule, DragDropModule],
-
+  standalone: true, // Mark component as standalone
+  imports: [
+    CommonModule, // Required for common directives like *ngIf
+    LayoutModule, // Required for BreakpointObserver
+    ShortTabComponent, // Import your standalone short-tab component
+    MyListComponent,   // Import your standalone my-list component
+    GoogleServiceComponent // Import your standalone google-service component
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
+export class AppComponent implements OnInit, OnDestroy {
+  title = 'LΛUNCH DØCK';
+  tagline = 'A launching point for tools, apps, or sites from one centralized location';
 
-export class AppComponent {
-  title = 'LΛUNCH DØCK';  
-  tagline ='A launching point for tools, apps, or sites from one centralized location';
-  tabs: Tab[] = [];
-  activeTabId: string = '';
-  backgroundColorEnabled = true;
-  username ='Nagesh B.';
-  
-  constructor(private renderer: Renderer2) {this.toggleBackgroundColor();}
-  
+  showSettingsMenu = false;
+  isMobile = false; // Flag to determine mobile layout
+  backgroundColorEnabled = true; // For toggling background
+
+  private destroy$ = new Subject<void>(); // Used to unsubscribe from observables on component destruction
+
+  constructor(private renderer: Renderer2, private breakpointObserver: BreakpointObserver) {}
+
   ngOnInit() {
-    const stored = localStorage.getItem('tabData');
-    if (stored) {
-      this.tabs = JSON.parse(stored);
-      if (this.tabs.length > 0) {
-        this.activeTabId = this.tabs[0].id;
-      }
-    }
-    
+    // Set initial background state
+    this.toggleBackgroundColor();
+
+    // Observe screen size changes for responsive layout
+    this.breakpointObserver.observe([
+      Breakpoints.HandsetPortrait,
+      Breakpoints.Small,
+      Breakpoints.TabletPortrait,
+      Breakpoints.WebPortrait // Added for portrait desktop breakpoints
+    ]).pipe(takeUntil(this.destroy$))
+      .subscribe(result => {
+        // Set isMobile to true if any of the handset or small breakpoints match
+        this.isMobile = result.matches;
+      });
   }
 
-   showSettingsMenu = false;
+  ngOnDestroy() {
+    this.destroy$.next(); // Emit a signal to complete all subscriptions
+    this.destroy$.complete(); // Complete the subject
+  }
 
   toggleSettingsMenu() {
     this.showSettingsMenu = !this.showSettingsMenu;
   }
 
+  // Toggles between two background gradients for the body
   toggleBackgroundColor() {
     const body = document.body;
-    
-     if (body.classList.contains('body-background-gradient-a')) {
-    body.classList.remove('body-background-gradient-a');
-    body.classList.add('body-background-gradient-b');
-  } else {
-    body.classList.remove('body-background-gradient-b');
-    body.classList.add('body-background-gradient-a');
-  }
-  }
-  getFavicon(url: string): string {
-    try {
-      const domain = new URL(url).hostname;
-      return `https://www.google.com/s2/favicons?domain=${domain}`;
-    } catch {
-      return '';
+    if (body.classList.contains('body-background-gradient-a')) {
+      body.classList.remove('body-background-gradient-a');
+      body.classList.add('body-background-gradient-b');
+    } else {
+      body.classList.remove('body-background-gradient-b');
+      body.classList.add('body-background-gradient-a');
     }
   }
 
-  getDomainName(url: string): string {
-    try {
-      return new URL(url).hostname.replace('www.', '');
-    } catch {
-      return url;
-    }
-  }
-  
-exportToJsonFile(): void {
-  const storageKey = 'tabData'; // or make it dynamic if needed
-  const rawData = localStorage.getItem(storageKey) || '[]';
-  const data = JSON.stringify(JSON.parse(rawData), null, 2);
-
-  // Create formatted timestamp: ddMMyyyyHHmmss
-  const now = new Date();
-  const timestamp = `${String(now.getDate()).padStart(2, '0')}${String(now.getMonth() + 1).padStart(2, '0')}${now.getFullYear()}${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
-
-  // Create filename like: tabData-21052025104530-saved-urls.json
-  const fileName = `${storageKey}-${timestamp}-saved-urls.json`;
-
-  const blob = new Blob([data], { type: 'application/json' });
-  const url = window.URL.createObjectURL(blob);
-
-  const anchor = document.createElement('a');
-  anchor.href = url;
-  anchor.download = fileName;
-  anchor.click();
-
-  window.URL.revokeObjectURL(url);
-}
-
-importFromJsonFile(event: Event): void {
-  const input = event.target as HTMLInputElement;
-  if (!input.files?.length) return;
-
-  const file = input.files[0];
-  const reader = new FileReader();
-
-  reader.onload = () => {
-    try {
-      const jsonData = JSON.parse(reader.result as string);
-
-      if (Array.isArray(jsonData)) {
-        // Optional: Validate structure here
-        localStorage.setItem('tabData', JSON.stringify(jsonData));
-        alert('Import successful!');
-      } else {
-        alert('Invalid file format. Expected an array.');
-      }
-    } catch (error) {
-      console.error('Invalid JSON:', error);
-      alert('Failed to import file.');
-    }
-  };
-
-  reader.readAsText(file);
-}
-  get activeTab(): Tab | undefined {
-    return this.tabs.find((tab) => tab.id === this.activeTabId);
-  }
-
-  addTab() {
-    const name = prompt('Enter tab name:');
-    if (name) {
-      const id = 'tab-' + Date.now();
-      this.tabs.push({ id, name, shortcuts: [] });
-      this.activeTabId = id;
-      this.save();
-    }
-  }
-
-  editTab(tab: Tab) {
-    const name = prompt('Edit tab name:', tab.name);
-    if (name && name !== tab.name) {
-      tab.name = name;
-      this.save();
-    }
-  }
-
-  deleteTab(tabId: string) {
-    this.tabs = this.tabs.filter((t) => t.id !== tabId);
-    if (this.activeTabId === tabId && this.tabs.length > 0) {
-      this.activeTabId = this.tabs[0].id;
-    }
-    this.save();
-  }
-  
-  selectTab(id: string) {
-    this.activeTabId = id;     
-  }
-  
-  addShortcutToActiveTab() {
-    const url = prompt('Enter URL:');
-    if (!url) return;
-
-    if (!this.activeTab) return;
-
-    var matchedUrl = this.activeTab.shortcuts.filter((s) => s.url === url);
-    if (matchedUrl.length > 0) {
-      alert('same url already saved, please try another!');
-      return;
-    }
-
-    const title = prompt('Enter Title:');
-    if (!title) return;
-
-    const promptTitle: string = title;//this.getDomainName(url);
-    const favicon = this.getFavicon(url);    
-    const tempObj: Shortcut = {
-      url,
-      title: promptTitle,
-      favicon,
+  /**
+   * Exports all application data from local storage (tabs and my list) into a single JSON file.
+   */
+  exportAllDataToJsonFile(): void {
+    const allData = {
+      [SHORT_TAB_STORAGE_KEY]: localStorage.getItem(SHORT_TAB_STORAGE_KEY) ? JSON.parse(localStorage.getItem(SHORT_TAB_STORAGE_KEY)!) : [],
+      [MY_LIST_STORAGE_KEY]: localStorage.getItem(MY_LIST_STORAGE_KEY) ? JSON.parse(localStorage.getItem(MY_LIST_STORAGE_KEY)!) : []
     };
-    this.activeTab?.shortcuts.push(tempObj);
-    this.save();
+
+    const data = JSON.stringify(allData, null, 2);
+
+    // Create formatted timestamp: ddMMyyyyHHmmss
+    const now = new Date();
+    const timestamp = `${String(now.getDate()).padStart(2, '0')}${String(now.getMonth() + 1).padStart(2, '0')}${now.getFullYear()}${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
+
+    // Create filename
+    const fileName = `launchdock-data-${timestamp}.json`;
+
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = window.URL.createObjectURL(blob);
+
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = fileName;
+    anchor.click();
+
+    window.URL.revokeObjectURL(url);
+    alert('All application data exported successfully!');
   }
 
-  save() {
-    localStorage.setItem('tabData', JSON.stringify(this.tabs));
-  }
-  deleteUrl(url: string) {
-    if (!this.activeTab) return;
+  /**
+   * Imports application data from a JSON file and restores it to local storage.
+   * Handles both tab data and my list data.
+   * @param event The file input change event.
+   */
+  importAllDataFromJsonFile(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (!input.files?.length) return;
 
-    this.activeTab.shortcuts = this.activeTab.shortcuts.filter(
-      (s) => s.url !== url
-    );
+    const file = input.files[0];
+    const reader = new FileReader();
 
-    this.save();
-  }
+    reader.onload = () => {
+      try {
+        const importedData = JSON.parse(reader.result as string);
 
-  dropTab(event: CdkDragDrop<any[]>) {
-  moveItemInArray(this.tabs, event.previousIndex, event.currentIndex);
-  this.save(); // Save new order to localStorage
-}
+        if (typeof importedData === 'object' && importedData !== null) {
+          // Check for tab data
+          if (importedData[SHORT_TAB_STORAGE_KEY] && Array.isArray(importedData[SHORT_TAB_STORAGE_KEY])) {
+            localStorage.setItem(SHORT_TAB_STORAGE_KEY, JSON.stringify(importedData[SHORT_TAB_STORAGE_KEY]));
+            console.log('Tab data imported successfully.');
+          } else {
+            console.warn('No valid tab data found in the import file.');
+          }
 
+          // Check for my list data
+          if (importedData[MY_LIST_STORAGE_KEY] && Array.isArray(importedData[MY_LIST_STORAGE_KEY])) {
+            localStorage.setItem(MY_LIST_STORAGE_KEY, JSON.stringify(importedData[MY_LIST_STORAGE_KEY]));
+            console.log('My List data imported successfully.');
+          } else {
+            console.warn('No valid My List data found in the import file.');
+          }
 
-dropShortcut(event: CdkDragDrop<any[]>) {
-  if (!this.activeTab || !this.activeTab.shortcuts) return;
-  moveItemInArray(this.activeTab.shortcuts, event.previousIndex, event.currentIndex);
-  this.save();
-}
+          alert('Import successful! Please refresh the page to see changes.');
+          // A full reload might be necessary to ensure all child components re-initialize with new data
+          // window.location.reload(); // Consider if this is needed based on your data flow
+        } else {
+          alert('Invalid file format. Expected a JSON object with specific keys.');
+        }
+      } catch (error) {
+        console.error('Invalid JSON or unexpected file content:', error);
+        alert('Failed to import file. Please ensure it is a valid JSON file with correct structure.');
+      }
+      // Reset the file input to allow re-importing the same file
+      input.value = '';
+    };
 
-}
-interface Shortcut {
-  title: string;
-  url: string;
-  favicon?: string;
-}
-
-interface Tab {
-  id: string;
-  name: string;
-  shortcuts: Shortcut[];
-}
-
-//manifest.json file data here 
-//create manifest.json file in dist for make sure it's extension for browser
-//Article here to read it and implement it - https://infolink.hashnode.dev/steps-to-convert-an-angular-app-into-a-browser-extension
-/*
-{
-  "manifest_version": 3,
-  "name": "My Shortcut Dashboard",
-  "version": "1.0",
-  "description": "A local tab and shortcut manager",
-  "chrome_url_overrides": {
-    "newtab": "index.html"
-  },
-  "icons": {
-    "128": "favicon.ico"
-  },
-  "permissions": ["storage"],
-  "action": {
-    "default_title": "Shortcut Manager"
+    reader.readAsText(file);
   }
 }
-
-
-*/

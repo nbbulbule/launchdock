@@ -1,0 +1,42 @@
+<div class="my-list-container">
+  <h3>My Categories & Items</h3>
+  <!-- cdkDropList is now on the parent container, and cdkDropListOrientation is added for horizontal dragging -->
+  <div class="category-tabs" cdkDropList [cdkDropListData]="categories" (cdkDropListDropped)="dropCategory($event)" cdkDropListOrientation="horizontal">
+    <!-- cdkDrag is now on each individual category tab -->
+    <div *ngFor="let category of categories; let i = index"
+         class="category-tab"
+         [class.active]="category.id === activeCategoryId"
+         (click)="selectCategory(category.id)"
+         cdkDrag> <!-- Added cdkDrag here -->
+      <div cdkDragHandle>
+        {{ category.name }}
+        <button class="edit-btn" (click)="editCategory(category); $event.stopPropagation()" title="Edit Category">✏️</button>
+        <button class="delete-btn" *ngIf="category.items.length === 0" (click)="deleteCategory(category.id); $event.stopPropagation()" title="Delete Category">🗑️</button>
+      </div>
+    </div>
+    <button class="add-btn" (click)="addCategory()">➕ Add Category</button>
+  </div>
+
+  <div *ngIf="activeCategory" class="category-items">
+    <!-- <h4>{{ activeCategory.name }} Items</h4> -->
+    <div class="items-list" cdkDropList [cdkDropListData]="activeCategory.items" (cdkDropListDropped)="dropItem($event)">
+      <div *ngFor="let item of activeCategory.items" class="list-item" cdkDrag>
+        <div cdkDragHandle class="item-content">
+          <a *ngIf="item.link.length > 0" [href]="item.link" target="_blank" class="item-link">
+            <img [src]="item.icon || getFavicon(item.link)" width="16" height="16" alt="icon" />
+            <span  style="color: blue;">{{ item.name }}</span>
+          </a>
+          <a *ngIf="item.link.length == 0"  class="item-link">           
+            <span>{{ item.name }}</span>
+          </a>
+        </div>
+        <div class="item-actions">
+          <button class="edit-btn" (click)="editItem(activeCategory, item)" title="Edit Item">✏️</button>
+          <button class="delete-btn" (click)="deleteItem(activeCategory, item.id)" title="Delete Item">🗑️</button>
+        </div>
+      </div>
+    </div>
+    <button class="add-btn" (click)="addItemToCategory(activeCategory)">+ Add Item</button>
+  </div>
+</div>
+

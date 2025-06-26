@@ -1,0 +1,198 @@
+.short-tab-container {
+  /* This container helps in providing internal padding/margin for the short-tab content */
+  padding: 2px;
+}
+
+/* Container for tabs */
+.tab-container {
+  padding: 0px;
+  margin: auto;
+  overflow-x: auto; /* Allow horizontal scrolling for tabs if they overflow */
+  white-space: nowrap; /* Prevent tabs from wrapping */
+}
+
+/* Each tab item container */
+.tab-bar {
+  display: flex;
+  gap: 5px;
+  padding: 5px 0; /* Adjust padding as needed */
+  border-bottom: 2px solid #ddd;
+}
+
+/* Individual tab styles */
+.tab {
+  display: inline-flex; /* Use inline-flex to keep items on one line and use gap */
+  align-items: center;
+  padding: 0px 7px; /* Slightly increased padding for better touch targets */
+  background-color: #ffffffc0; /* Slightly more opaque background */
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  font-weight: 500;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Soft shadow */
+}
+
+.tab:hover {
+  background-color: #d5d5d5;
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Active tab styles */
+.tab.active {
+  background-color: #007bff;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Label within tab (drag handle) */
+.tab-label {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Space between text and buttons */
+}
+
+/* Buttons inside tabs (Edit, Delete) */
+.tab button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px; /* Adjust font size */
+  margin-left: 0px; /* Reset margin */
+  color: #555; /* Darker color for visibility */
+  opacity: 0.7;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.tab button:hover {
+  color: #ff3333; /* Red on hover */
+  opacity: 1;
+}
+
+.tab.active button {
+  color: white; /* White buttons on active tab */
+}
+
+/* Shortcut Grid */
+.shortcut-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Responsive grid */
+  gap: 8px; /* Increased gap */
+  padding: 8px;
+}
+
+/* Individual Shortcut Card */
+.shortcut-card {
+  background-color: #ffffffc0; /* Slightly translucent white */
+  padding: 10px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: flex; /* Use flexbox for internal alignment */
+  flex-direction: column;
+  justify-content: space-between; /* Push delete button to bottom */
+  align-items: center;
+  position: relative; /* For delete button positioning */
+}
+
+.shortcut-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+  background-color: #eff6ff; /* Specific hover background */
+}
+
+.shortcut-card a {
+  text-decoration: none; /* Ensure link text is not underlined */
+  color: inherit;
+  display: block; /* Make the anchor fill the card's available space */
+  width: 100%;
+  height: 100%;
+  padding-bottom: 25px; /* Make space for delete button if it's absolute */
+  box-sizing: border-box;
+}
+
+.shortcut-card h6 {
+  font-size: 14px; /* Adjust font size */
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: #333;
+  max-width: 100%; /* Ensure text doesn't overflow */
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.shortcut-card p {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Icon Placeholder (from original app.component.css, now specific to short-tab) */
+.icon-placeholder {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  color: white;
+  margin: 0 auto; /* Center the icon */
+}
+
+.icon-placeholder img {
+  border-radius: 6px; /* Slightly rounded favicons */
+}
+
+/* Delete button on shortcut card */
+.delete-shortcut-button {
+  position: absolute;
+  bottom: 8px;
+  right: 60px;
+  background-color: rgba(255, 0, 0, 0.7); /* Red background, slightly transparent */
+  color: white;
+  border: none;
+  border-radius: 50%; /* Circular button */
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: background-color 0.2s, opacity 0.2s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.delete-shortcut-button:hover {
+  background-color: red;
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Add Tab/Shortcut Buttons */
+.add-tab-button, .add-shortcut-button {
+  background-color: #28a745; /* Green for add buttons */
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(40, 167, 69, 0.2);
+}
+
+.add-tab-button:hover, .add-shortcut-button:hover {
+  background-color: #218838;
+  transform: scale(1.03);
+}
+
+.add-tab-button:active, .add-shortcut-button:active {
+  transform: scale(0.98);
+}

@@ -1,0 +1,112 @@
+.google-services-container {
+  padding: 2px;
+}
+
+h3 {
+  color: #333;
+  font-size: 1.4em;
+  margin-bottom: 0px;
+}
+
+/* Style for the Angular Material tab group */
+mat-tab-group {
+  margin-top: 15px;
+  background-color: #ffffff; /* White background for tab content area */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Subtle shadow */
+}
+
+/* Style for individual tab content */
+.tab-content {
+  padding: 15px; /* Padding inside each tab */
+}
+
+.tab-content h4 {
+  color: #555;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.tab-content p {
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+/* Embedded iframe for Calendar */
+.tab-content iframe {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden; /* Ensure rounded corners on iframe */
+  margin-bottom: 15px;
+}
+
+/* Buttons for Google actions */
+.google-action-button {
+  background-color: #4285F4; /* Google Blue */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 0.95em;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(66, 133, 244, 0.2);
+}
+
+.google-action-button:hover {
+  background-color: #357ae8;
+  transform: scale(1.03);
+}
+
+.google-action-button:active {
+  transform: scale(0.98);
+}
+
+.email-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.integration-note {
+  font-size: 0.85em;
+  color: #888;
+  font-style: italic;
+  margin-top: 20px;
+  border-top: 1px dashed #eee;
+  padding-top: 10px;
+}
+
+/* Adjust Material Tab Headers for better aesthetics */
+::ng-deep .mat-tab-label {
+  min-width: 100px; /* Ensure tabs have a decent minimum width */
+  padding: 0 20px; /* Adjust padding for tab labels */
+  font-weight: 600;
+  color: #6a6a6a; /* A darker grey for inactive tabs, ensures visibility */
+  background-color: #f0f0f0; /* A light background for inactive tabs */
+  transition: color 0.2s, background-color 0.2s, border-bottom 0.2s;
+  border-radius: 5px 5px 0 0; /* Rounded top corners */
+  margin-right: 2px; /* Small gap between tabs */
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.1); /* Subtle bottom border for inactive */
+}
+
+::ng-deep .mat-tab-label:hover {
+  background-color: #e0e0e0; /* Slightly darker on hover for inactive tabs */
+}
+
+::ng-deep .mat-tab-label-active {
+  color: #4285F4; /* Google Blue for active tab text */
+  background-color: #ffffff; /* White background for active tab */
+  border-bottom: 3px solid #4285F4; /* Blue indicator */
+  box-shadow: none; /* Remove inset shadow for active tab */
+}
+
+::ng-deep .mat-tab-header {
+  border-bottom: none; /* Remove default border from header */
+}
+
+::ng-deep .mat-ink-bar {
+  display: none; /* Hide default ink bar, using border-bottom on label-active instead */
+}
