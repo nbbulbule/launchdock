@@ -6,7 +6,7 @@
 
 
 .my-list-container {
-  padding: 10px;
+  padding: 0px;
 }
 
 h3 {
@@ -28,7 +28,7 @@ h3 {
 }
 
 .category-tab {
-  padding: 8px 12px;
+  padding: 0px 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
   cursor: pointer;
@@ -59,8 +59,8 @@ h3 {
   border: none;
   cursor: pointer;
   font-size: 0.8em;
-  padding: 2px;
-  margin-left: 5px;
+  padding: 1px;
+  margin-left: 0px;
   color: #666;
   opacity: 0.8;
   transition: opacity 0.2s, color 0.2s;
@@ -78,7 +78,7 @@ h3 {
 .category-items {
   border: 1px solid #eee;
   border-radius: 8px;
-  padding: 15px;
+  padding: 8px;
   background-color: #ffffff;
   box-shadow: inset 0 0 5px rgba(0,0,0,0.05); /* Inner shadow for depth */
   flex-grow: 1; /* Allow it to take available vertical space */
@@ -103,9 +103,9 @@ h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   background-color: #f8f9fa; /* Lighter background for list items */
-  padding: 8px 12px;
+  padding: 3px 5px;
   border-radius: 5px;
   border: 1px solid #e9ecef;
   transition: background-color 0.2s, box-shadow 0.2s;
@@ -157,9 +157,9 @@ h3 {
 .my-list-container .add-btn {
   background-color: #28a745; /* Green */
   color: white;
-  padding: 8px 15px;
+  padding: 0px 0px;
   border-radius: 8px;
-  margin-top: 15px;
+  margin-top: 0px;
   transition: background-color 0.3s ease;
   font-size: 1em;
   box-shadow: 0 4px 6px rgba(40, 167, 69, 0.2);

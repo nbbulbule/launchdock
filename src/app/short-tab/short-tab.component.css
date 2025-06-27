@@ -31,6 +31,7 @@
   font-weight: 500;
   transition: background-color 0.2s, transform 0.1s;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Soft shadow */
+  height:25px;
 }
 
 .tab:hover {
@@ -181,9 +182,9 @@
 .add-tab-button, .add-shortcut-button {
   background-color: #28a745; /* Green for add buttons */
   color: white;
-  padding: 8px 15px;
+  padding: 0px 0px;
   border-radius: 8px;
-  margin-top: 10px;
+  margin-top: 0px;
   transition: background-color 0.3s ease, transform 0.2s ease;
   box-shadow: 0 4px 6px rgba(40, 167, 69, 0.2);
 }

@@ -9,7 +9,6 @@
 ### Add app as browser extension (Run project and add)
 Follow article [Click here](https://infolink.hashnode.dev/steps-to-convert-an-angular-app-into-a-browser-extension)
 
-
 ### Add app as browser extension (download and add)
 > This is angular project where you can clone and run on local
 > If you are not aware about angular build/run and want to use extension to browser (Jiosphere/Chrome/Edge) directly then follow steps
@@ -100,7 +99,19 @@ src/
 
 ### Visit http://localhost:4200
 
+## Build for Prod mode (to create extension file)
+
+- run below command in vs code once project is opened
+ng build --configuration=production
+
+- after prod build paste below line in index.html (file in dist folder)
+<link rel="stylesheet" href="./styles.css"> 
+
+- for more details check below article (how to add extention to browser)
+Follow article [Click here](https://infolink.hashnode.dev/steps-to-convert-an-angular-app-into-a-browser-extension)
+
 ---
+
 
 ## ✨ Customization
 - To add more setting options (like font size, theme, etc.), extend the settings dropdown.
@@ -146,6 +157,8 @@ This section of the application provides dedicated tabs for integrating Google C
 
 #### Configure Display Options:
 
+- Note: keep default view as "schedule"
+
 - On the left side of this customization tool, you'll see a list of your calendars under "Calendars to display". Ensure the checkbox next to your primary calendar (and any other calendars whose events you want to see) is ticked.
 
 - Note on Tasks: Google Tasks with due dates will appear on your main Google Calendar if your "Tasks" calendar is enabled for display in your regular Calendar view. The embed tool itself does not offer "Tasks" as a separate, distinct calendar to embed.
@@ -168,38 +181,10 @@ This section of the application provides dedicated tabs for integrating Google C
 
 <iframe
   src="PASTE_YOUR_LONG_CUSTOMIZED_GOOGLE_CALENDAR_EMBED_URL_HERE"
-  style="border: 0"
-  width="100%"
-  height="300"
-  frameborder="0"
-  scrolling="no"
-  title="Google Calendar Embed"
-></iframe>
+   style="border-width:0" width="100%" height="400" frameborder="0" scrolling="no"
+  title="Google Calendar Embed"></iframe>
 
 #### Save the file.
-
-### 2. Google Tasks Integration
-The "Tasks" tab provides a direct link to Google Tasks due to embedding limitations.
-
-#### Explanation of Tasks Embedding:
-
-- Direct Embedding Limitations: Directly embedding the full, interactive Google Tasks interface (https://tasks.google.com/) into an <iframe> on external domains (like this application) is generally prevented by browser security policies (specifically, the X-Frame-- -- -Options or Content-Security-Policy headers set by Google). This is to prevent clickjacking and other security vulnerabilities.
-
-- API for Full Control: For a truly integrated and interactive Google Tasks experience (e.g., showing task lists, adding/editing tasks directly within the app), you would need to utilize the Google Tasks API. This involves:
-
-- Creating a project in the Google Cloud Platform.
-
-- Enabling the Google Tasks API.
-
-- Implementing OAuth 2.0 for user authentication and authorization.
-
-- Writing Angular code to make API calls to fetch, create, update, and delete tasks, then rendering them dynamically in your component. This is a significantly more complex development task.
-
-#### Current Implementation:
-
-- The "Tasks" tab currently offers a convenient link to open Google Tasks in a new browser tab for quick access. This avoids the security limitations of iframes.
-
-<a href="https://tasks.google.com/" target="_blank" class="google-action-button">Open Google Tasks</a>
 
 ---
 

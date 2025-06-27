@@ -123,8 +123,8 @@ export class MyListComponent implements OnInit {
    */
   deleteCategory(id: string) {
     const categoryToDelete = this.categories.find(cat => cat.id === id);
-    if (categoryToDelete && categoryToDelete.items.length > 0) {
-      if (!confirm(`Category "${categoryToDelete.name}" contains items. Are you sure you want to delete it?`)) {
+    if (categoryToDelete) {
+      if (!confirm(`Category "${categoryToDelete.name}" Are you sure you want to delete it?`)) {
         return; // User cancelled
       }
     }

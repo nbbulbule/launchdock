@@ -133,8 +133,8 @@ export class ShortTabComponent implements OnInit {
   deleteTab(tabId: string) {
     // Confirm deletion if there are shortcuts, otherwise proceed
     const tabToDelete = this.tabs.find(t => t.id === tabId);
-    if (tabToDelete && tabToDelete.shortcuts.length > 0) {
-      if (!confirm(`Tab "${tabToDelete.name}" contains shortcuts. Are you sure you want to delete it?`)) {
+    if (tabToDelete ) {
+      if (!confirm(`Tab "${tabToDelete.name}" Are you sure you want to delete it?`)) {
         return; // User cancelled
       }
     }
