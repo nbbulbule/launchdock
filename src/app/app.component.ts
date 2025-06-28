@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common'; // For *ngIf
 import { ShortTabComponent } from './short-tab/short-tab.component';
 import { MyListComponent } from './my-list/my-list.component';
 import { GoogleServiceComponent } from './google-service/google-service.component';
+import { ConfigService } from './services/app-config.service';
 
 // Define local storage keys
 const SHORT_TAB_STORAGE_KEY = 'tabData-dev';
@@ -27,8 +28,8 @@ const MY_LIST_STORAGE_KEY = 'myListData';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'LΛUNCH DØCK';
-  tagline = 'A launching point for tools, apps, or sites from one centralized location';
+  title:string = "";
+  tagline:string = "";
 
   showSettingsMenu = false;
   isMobile = false; // Flag to determine mobile layout
@@ -36,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>(); // Used to unsubscribe from observables on component destruction
 
-  constructor(private renderer: Renderer2, private breakpointObserver: BreakpointObserver) {}
+  constructor(private renderer: Renderer2, private breakpointObserver: BreakpointObserver, private configService: ConfigService) {}
 
   ngOnInit() {
     // Set initial background state
@@ -53,6 +54,19 @@ export class AppComponent implements OnInit, OnDestroy {
         // Set isMobile to true if any of the handset or small breakpoints match
         this.isMobile = result.matches;
       });
+
+       // Get the URL from the ConfigService once it's loaded
+    const config = this.configService.getConfig();
+    if (config && config.appName && config.tagline) {
+      this.title = config.appName;      
+      this.tagline = config.tagline;
+      console.log("config file details ", config);
+    } else {
+      console.warn('appName and tagline not found in configuration. Using fallback.');
+      // Fallback if config isn't loaded or URL is missing
+      this.title = "Launch Dock";
+      this.tagline = "tagline here";
+    }
   }
 
   ngOnDestroy() {
