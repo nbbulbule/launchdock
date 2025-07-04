@@ -31,6 +31,7 @@
           </a>
         </div>
         <div class="item-actions">
+          <button class="edit-btn" (click)="openEditInfoDialog(item)" title="Click for add/edit notes">📝</button>
           <button class="edit-btn" (click)="editItem(activeCategory, item)" title="Edit Item">✏️</button>
           <button class="delete-btn" (click)="deleteItem(activeCategory, item.id)" title="Delete Item">🗑️</button>
         </div>

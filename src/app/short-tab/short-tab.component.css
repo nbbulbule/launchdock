@@ -17,6 +17,7 @@
   gap: 5px;
   padding: 5px 0; /* Adjust padding as needed */
   border-bottom: 2px solid #ddd;
+  flex-wrap: wrap;
 }
 
 /* Individual tab styles */

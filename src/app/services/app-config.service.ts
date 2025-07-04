@@ -6,6 +6,7 @@ import { firstValueFrom } from 'rxjs'; // For Promise-based loading
 export interface AppConfig {  
   appName?: string;
   tagline?: string;
+  googleCalendarURL?: string;
   // Add other properties defined in app-settings.json here
 }
 
@@ -34,7 +35,8 @@ export class ConfigService {
         // Handle error gracefully, e.g., set default values or show a message
         this.config = {          
           appName: 'App Name',
-          tagline: 'Tagline'
+          tagline: 'Tagline',
+          googleCalendarURL: ''
         };
         // Re-throw or return rejected promise if fatal
         throw error;

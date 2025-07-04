@@ -1,0 +1,23 @@
+.full-width {
+  width: 100%;
+}   
+.text-area-custom{
+  font-weight:lighter; 
+  text-align:justify;
+  padding-right:15px;
+}
+.dialog-heading{
+    margin-bottom: 1px;
+    padding-bottom: 1px;
+}
+.dialog-sub-heading{
+    margin-bottom: 1px;
+    padding-bottom: 1px;
+    color: #7dd7ae;
+    text-transform: capitalize;
+    margin-left: 24px;
+}
+.dialog-content{
+  margin-top: 5px;
+  padding-top: 5px;
+}

@@ -1,21 +1,23 @@
 <div class="short-tab-container">
   <!-- START: Tab section -->
   <div class="tab-container">
-    <div class="tab-bar" cdkDropList [cdkDropListData]="tabs" (cdkDropListDropped)="dropTab($event)" cdkDropListOrientation="horizontal">
+    <div class="tab-bar" cdkDropList [cdkDropListData]="tabs" (cdkDropListDropped)="dropTab($event)"
+      cdkDropListOrientation="horizontal">
       <div *ngFor="let tab of tabs; let i = index" class="tab" [class.active]="tab.id === activeTabId" cdkDrag
         (click)="selectTab(tab.id)">
         <div cdkDragHandle class="tab-label">
           {{ tab.name }}
           <button class="edit-tab-button" (click)="editTab(tab); $event.stopPropagation()" title="Edit Tab">✏️</button>
           <!-- Only show delete button if no shortcuts are present in the tab -->
-          <button class="delete-tab-button" *ngIf="tab.shortcuts.length === 0" (click)="deleteTab(tab.id); $event.stopPropagation()" title="Delete Tab">🗑️</button>
+          <button class="delete-tab-button" *ngIf="tab.shortcuts.length === 0"
+            (click)="deleteTab(tab.id); $event.stopPropagation()" title="Delete Tab">🗑️</button>
         </div>
       </div>
       <button class="add-tab-button" (click)="addTab()" title="Add New Tab">➕ Add Tab</button>
     </div>
   </div>
   <!-- END: Tab section -->
-
+   
   <!--START: Shortcut section -->
   <div class="shortcut-grid" *ngIf="activeTab" cdkDropList [cdkDropListData]="activeTab.shortcuts"
     (cdkDropListDropped)="dropShortcut($event)">
@@ -29,7 +31,8 @@
           <!-- <p>Visit website</p> -->
         </a>
       </div>
-      <button class="delete-shortcut-button" (click)="deleteUrl(shortcut.url); $event.stopPropagation(); $event.preventDefault();" title="Delete Shortcut">
+      <button class="delete-shortcut-button"
+        (click)="deleteUrl(shortcut.url); $event.stopPropagation(); $event.preventDefault();" title="Delete Shortcut">
         🗑️
       </button>
     </div>

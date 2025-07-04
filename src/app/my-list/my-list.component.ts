@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common'; // For *ngIf, *ngFor
 import { FormsModule } from '@angular/forms'; // For prompt input
-
+import { MatDialog} from '@angular/material/dialog';
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 // Interface for a single item within a category
 interface CategoryItem {
   id: string;
   name: string;
   link: string;
   icon?: string;
+  infoDetails?: string;
 }
 
 // Interface for a category, containing a list of items
@@ -36,13 +38,30 @@ export class MyListComponent implements OnInit {
   // Unique local storage key for my-list data
   localStorageName: string = 'myListData';
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
     // Load categories data from local storage on initialization
     this.loadCategories();
   }
-
+   
+  openEditInfoDialog(item:CategoryItem) {
+    if(!item.infoDetails){
+      item.infoDetails ="";
+    }
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
+      width: '600px',
+      data:   item ,  
+      height: '400px',         
+    });
+     dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+         item.infoDetails = result;      
+        console.log('Updated:', result);
+        this.saveCategories();
+      }
+    });
+  }
   /**
    * Loads categories data from local storage.
    * If data exists, it parses it and sets the first category as active.
