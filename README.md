@@ -74,9 +74,9 @@ src/
 
 ## 📸 Screenshots
 
-| Tabs & Shortcuts | Settings Menu |
-|------------------|---------------|
-| ![tabs](screenshots/image.png) | ![settings](screenshots/settings.jpg) |
+| Tabs & Shortcuts | Settings Menu | Notes/Info Popup  |
+|------------------|---------------|--------------|
+| ![tabs](screenshots/image.png) | ![settings](screenshots/settings.jpg) | ![Notes Add](screenshots/more_info_popup.jpg) 
 
 ---
 
