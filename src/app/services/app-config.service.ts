@@ -7,6 +7,7 @@ export interface AppConfig {
   appName?: string;
   tagline?: string;
   googleCalendarURL?: string;
+  exportFileName?: string;
   // Add other properties defined in app-settings.json here
 }
 
@@ -36,7 +37,8 @@ export class ConfigService {
         this.config = {          
           appName: 'App Name',
           tagline: 'Tagline',
-          googleCalendarURL: ''
+          googleCalendarURL: '',
+          exportFileName:"launchdock-data"
         };
         // Re-throw or return rejected promise if fatal
         throw error;

@@ -2,83 +2,81 @@ import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 import { BreakpointObserver, Breakpoints, LayoutModule } from '@angular/cdk/layout';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { CommonModule } from '@angular/common'; // For *ngIf
-
-// Import standalone components used in this template
+import { CommonModule } from '@angular/common';
 import { ShortTabComponent } from './short-tab/short-tab.component';
 import { MyListComponent } from './my-list/my-list.component';
 import { GoogleServiceComponent } from './google-service/google-service.component';
 import { ConfigService } from './services/app-config.service';
+import { IndexedDBService } from './services/indexdb.service';
 
-// Define local storage keys
-const SHORT_TAB_STORAGE_KEY = 'tabData-dev';
+const SHORT_TAB_STORAGE_KEY = 'shortTabData';
 const MY_LIST_STORAGE_KEY = 'myListData';
 
 @Component({
   selector: 'app-root',
-  standalone: true, // Mark component as standalone
+  standalone: true,
   imports: [
-    CommonModule, // Required for common directives like *ngIf
-    LayoutModule, // Required for BreakpointObserver
-    ShortTabComponent, // Import your standalone short-tab component
-    MyListComponent,   // Import your standalone my-list component
-    GoogleServiceComponent // Import your standalone google-service component
+    CommonModule,
+    LayoutModule,
+    ShortTabComponent,
+    MyListComponent,
+    GoogleServiceComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title:string = "";
-  tagline:string = "";
-
+  title: string = "";
+  tagline: string = "";
+  exportFileName: string = "";
   showSettingsMenu = false;
-  isMobile = false; // Flag to determine mobile layout
-  backgroundColorEnabled = true; // For toggling background
+  isMobile = false;
+  backgroundColorEnabled = true;
+  private destroy$ = new Subject<void>();
 
-  private destroy$ = new Subject<void>(); // Used to unsubscribe from observables on component destruction
-
-  constructor(private renderer: Renderer2, private breakpointObserver: BreakpointObserver, private configService: ConfigService) {}
+  constructor(
+    private renderer: Renderer2,
+    private breakpointObserver: BreakpointObserver,
+    private configService: ConfigService,
+    private dbService: IndexedDBService
+  ) {}
 
   ngOnInit() {
-    // Set initial background state
     this.toggleBackgroundColor();
 
-    // Observe screen size changes for responsive layout
     this.breakpointObserver.observe([
       Breakpoints.HandsetPortrait,
       Breakpoints.Small,
       Breakpoints.TabletPortrait,
-      Breakpoints.WebPortrait // Added for portrait desktop breakpoints
-    ]).pipe(takeUntil(this.destroy$))
-      .subscribe(result => {
-        // Set isMobile to true if any of the handset or small breakpoints match
-        this.isMobile = result.matches;
-      });
+      Breakpoints.WebPortrait
+    ])
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(result => {
+      this.isMobile = result.matches;
+    });
 
-       // Get the URL from the ConfigService once it's loaded
     const config = this.configService.getConfig();
-    if (config && config.appName && config.tagline) {
-      this.title = config.appName;      
+    if (config?.appName && config?.tagline && config?.exportFileName) {
+      this.title = config.appName;
       this.tagline = config.tagline;
-      console.log("config file details ", config);
+      this.exportFileName = config.exportFileName;
+      console.log("config file details", config);
     } else {
-      console.warn('appName and tagline not found in configuration. Using fallback.');
-      // Fallback if config isn't loaded or URL is missing
       this.title = "Launch Dock";
       this.tagline = "tagline here";
+      this.exportFileName = "launchdock-data";
     }
   }
 
   ngOnDestroy() {
-    this.destroy$.next(); // Emit a signal to complete all subscriptions
-    this.destroy$.complete(); // Complete the subject
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   toggleSettingsMenu() {
     this.showSettingsMenu = !this.showSettingsMenu;
   }
 
-  // Toggles between two background gradients for the body
   toggleBackgroundColor() {
     const body = document.body;
     if (body.classList.contains('body-background-gradient-a')) {
@@ -91,39 +89,45 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Exports all application data from local storage (tabs and my list) into a single JSON file.
+   * Exports all application data from IndexedDB into a single JSON file.
    */
-  exportAllDataToJsonFile(): void {
-    const allData = {
-      [SHORT_TAB_STORAGE_KEY]: localStorage.getItem(SHORT_TAB_STORAGE_KEY) ? JSON.parse(localStorage.getItem(SHORT_TAB_STORAGE_KEY)!) : [],
-      [MY_LIST_STORAGE_KEY]: localStorage.getItem(MY_LIST_STORAGE_KEY) ? JSON.parse(localStorage.getItem(MY_LIST_STORAGE_KEY)!) : []
-    };
+  async exportAllDataToJsonFile(): Promise<void> {
+    try {
+      const [shortTabData, myListData] = await Promise.all([
+        this.dbService.getData(SHORT_TAB_STORAGE_KEY),
+        this.dbService.getData(MY_LIST_STORAGE_KEY)
+      ]);
 
-    const data = JSON.stringify(allData, null, 2);
+      const allData = {
+        [SHORT_TAB_STORAGE_KEY]: shortTabData ?? [],
+        [MY_LIST_STORAGE_KEY]: myListData ?? []
+      };
 
-    // Create formatted timestamp: ddMMyyyyHHmmss
-    const now = new Date();
-    const timestamp = `${String(now.getDate()).padStart(2, '0')}${String(now.getMonth() + 1).padStart(2, '0')}${now.getFullYear()}${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
+      const data = JSON.stringify(allData, null, 2);
 
-    // Create filename
-    const fileName = `launchdock-data-${timestamp}.json`;
+      const now = new Date();
+      const timestamp = `${String(now.getDate()).padStart(2, '0')}${String(now.getMonth() + 1).padStart(2, '0')}${now.getFullYear()}${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
 
-    const blob = new Blob([data], { type: 'application/json' });
-    const url = window.URL.createObjectURL(blob);
+      const fileName = this.exportFileName + '-' + timestamp + '.json';
 
-    const anchor = document.createElement('a');
-    anchor.href = url;
-    anchor.download = fileName;
-    anchor.click();
+      const blob = new Blob([data], { type: 'application/json' });
+      const url = window.URL.createObjectURL(blob);
 
-    window.URL.revokeObjectURL(url);
-    alert('All application data exported successfully!');
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      anchor.download = fileName;
+      anchor.click();
+
+      window.URL.revokeObjectURL(url);
+      alert('All application data exported successfully!');
+    } catch (err) {
+      console.error('Error exporting data:', err);
+      alert('Export failed. Please try again.');
+    }
   }
 
   /**
-   * Imports application data from a JSON file and restores it to local storage.
-   * Handles both tab data and my list data.
-   * @param event The file input change event.
+   * Imports application data from a JSON file and stores it into IndexedDB.
    */
   importAllDataFromJsonFile(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -132,38 +136,39 @@ export class AppComponent implements OnInit, OnDestroy {
     const file = input.files[0];
     const reader = new FileReader();
 
-    reader.onload = () => {
+    reader.onload = async () => {
       try {
         const importedData = JSON.parse(reader.result as string);
 
         if (typeof importedData === 'object' && importedData !== null) {
-          // Check for tab data
-          if (importedData[SHORT_TAB_STORAGE_KEY] && Array.isArray(importedData[SHORT_TAB_STORAGE_KEY])) {
-            localStorage.setItem(SHORT_TAB_STORAGE_KEY, JSON.stringify(importedData[SHORT_TAB_STORAGE_KEY]));
-            console.log('Tab data imported successfully.');
+          const tabData = importedData[SHORT_TAB_STORAGE_KEY] ?? importedData['tabData-dev'];
+          if (tabData && Array.isArray(tabData)) {
+            await this.dbService.saveData(SHORT_TAB_STORAGE_KEY, tabData);
+            console.log('Short tab data imported successfully.');
           } else {
-            console.warn('No valid tab data found in the import file.');
+            console.warn('No valid short tab data found.');
           }
 
-          // Check for my list data
           if (importedData[MY_LIST_STORAGE_KEY] && Array.isArray(importedData[MY_LIST_STORAGE_KEY])) {
-            localStorage.setItem(MY_LIST_STORAGE_KEY, JSON.stringify(importedData[MY_LIST_STORAGE_KEY]));
-            console.log('My List data imported successfully.');
+            await this.dbService.saveData(MY_LIST_STORAGE_KEY, importedData[MY_LIST_STORAGE_KEY]);
+            console.log('My list data imported successfully.');
           } else {
-            console.warn('No valid My List data found in the import file.');
+            console.warn('No valid my list data found.');
           }
+
+          
 
           alert('Import successful! Please refresh the page to see changes.');
-          // A full reload might be necessary to ensure all child components re-initialize with new data
-          // window.location.reload(); // Consider if this is needed based on your data flow
+          // Optionally:
+          // window.location.reload();
         } else {
           alert('Invalid file format. Expected a JSON object with specific keys.');
         }
       } catch (error) {
-        console.error('Invalid JSON or unexpected file content:', error);
-        alert('Failed to import file. Please ensure it is a valid JSON file with correct structure.');
+        console.error('Error reading imported file:', error);
+        alert('Failed to import file. Please ensure it is a valid JSON file.');
       }
-      // Reset the file input to allow re-importing the same file
+
       input.value = '';
     };
 

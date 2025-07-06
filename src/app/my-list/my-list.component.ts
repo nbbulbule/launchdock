@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common'; // For *ngIf, *ngFor
 import { FormsModule } from '@angular/forms'; // For prompt input
 import { MatDialog} from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { IndexedDBService } from  '../services/indexdb.service';
+
 // Interface for a single item within a category
 interface CategoryItem {
   id: string;
@@ -36,9 +38,9 @@ export class MyListComponent implements OnInit {
   activeCategoryId: string = '';
   activeCategory: Category | undefined;
   // Unique local storage key for my-list data
-  localStorageName: string = 'myListData';
+  listIndexDBTableName: string = 'myListData';
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private dbService: IndexedDBService ) { }
 
   ngOnInit(): void {
     // Load categories data from local storage on initialization
@@ -66,23 +68,22 @@ export class MyListComponent implements OnInit {
    * Loads categories data from local storage.
    * If data exists, it parses it and sets the first category as active.
    */
-  loadCategories(): void {
-    const stored = localStorage.getItem(this.localStorageName);
-    if (stored) {
-      try {
-        this.categories = JSON.parse(stored);
-        if (this.categories.length > 0) {
-          // Set the first category as active if none is active or active category was deleted
-          this.activeCategoryId = this.categories[0].id;
-          this.selectCategory(this.activeCategoryId);
-        }
-      } catch (e) {
-        console.error('Error parsing stored category data:', e);
-        this.categories = []; // Reset if data is corrupted
-        localStorage.removeItem(this.localStorageName); // Clear corrupted data
+ async loadCategories(): Promise<void> {
+  try {
+    await this.dbService.isReady(); // <- wait for DB
+    const stored = await this.dbService.getData<Category[]>(this.listIndexDBTableName);
+    if (stored && Array.isArray(stored)) {
+      this.categories = stored;
+      if (this.categories.length > 0) {
+        this.activeCategoryId = this.categories[0].id;
+        this.selectCategory(this.activeCategoryId);
       }
     }
+  } catch (e) {
+    console.error('Error loading categories from IndexedDB:', e);
+    this.categories = [];
   }
+}
 
   /**
    * Returns a favicon URL for a given link.
@@ -237,10 +238,11 @@ export class MyListComponent implements OnInit {
 
   /**
    * Saves the current `categories` array to local storage.
-   */
-  saveCategories() {
-    localStorage.setItem(this.localStorageName, JSON.stringify(this.categories));
-  }
+   */  
+  saveCategories(): void {
+  this.dbService.saveData(this.listIndexDBTableName, this.categories)
+    .catch(err => console.error('Error saving categories to IndexedDB:', err));
+}
 
   /**
    * Handles drag and drop reordering of categories.
@@ -264,3 +266,5 @@ export class MyListComponent implements OnInit {
     }
   }
 }
+
+
