@@ -259,19 +259,6 @@ npm install ngx-indexed-db
 | **Android WebView**      | 6% of free space (same as Chrome Mobile)       | Behavior mimics Chrome on Android                             |
 
 
-
-## ✅ How It Works
-
-ASP.NET Core uses a **configuration provider model** to load settings from:
-
-| Source                    | Purpose                                             |
-|---------------------------|-----------------------------------------------------|
-| `appsettings.json`        | Default config for all environments                 |
-| `appsettings.{ENV}.json`  | Overrides for a specific environment (e.g. Development) |
-| Environment variables     | Good for containers, secrets                        |
-| User secrets (dev only)   | Secure sensitive data locally                       |
-| Command-line arguments    | Runtime overrides                                   |
-| Azure App Configuration   | Externalized config (cloud)                         |
 ---
 
 ## 🙌 Acknowledgements
