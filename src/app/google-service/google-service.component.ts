@@ -4,14 +4,13 @@ import { MatTabsModule } from '@angular/material/tabs'; // For Angular Material 
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ConfigService } from '../services/app-config.service';
 @Component({
-  selector: 'app-google-service',
-  standalone: true, // Mark component as standalone
-  imports: [
-    CommonModule, // Required for common directives
-    MatTabsModule, // Required for MatTabGroup and MatTab
-  ],
-  templateUrl: './google-service.component.html',
-  styleUrls: ['./google-service.component.css'],
+    selector: 'app-google-service', // Mark component as standalone
+    imports: [
+        CommonModule, // Required for common directives
+        MatTabsModule, // Required for MatTabGroup and MatTab
+    ],
+    templateUrl: './google-service.component.html',
+    styleUrls: ['./google-service.component.css']
 })
 export class GoogleServiceComponent implements OnInit {
   constructor(

@@ -27,15 +27,14 @@ interface Category {
 }
 
 @Component({
-  selector: 'app-my-list',
-  standalone: true, // Mark component as standalone
-  imports: [
-    CommonModule, // Required for common directives like *ngIf, *ngFor
-    FormsModule, // Required for prompt/input handling
-    DragDropModule, // Required for CdkDragDrop
-  ],
-  templateUrl: './my-list.component.html',
-  styleUrls: ['./my-list.component.css'],
+    selector: 'app-my-list', // Mark component as standalone
+    imports: [
+        CommonModule, // Required for common directives like *ngIf, *ngFor
+        FormsModule, // Required for prompt/input handling
+        DragDropModule, // Required for CdkDragDrop
+    ],
+    templateUrl: './my-list.component.html',
+    styleUrls: ['./my-list.component.css']
 })
 export class MyListComponent implements OnInit {
   categories: Category[] = [];

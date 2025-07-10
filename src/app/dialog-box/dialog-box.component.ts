@@ -19,18 +19,17 @@ interface CategoryItem {
 }
 
 @Component({
-  selector: 'app-dialog-box',
-  standalone: true,
-  imports: [CommonModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatButtonModule],
-  templateUrl: './dialog-box.component.html',
-  styleUrl: './dialog-box.component.css'
+    selector: 'app-dialog-box',
+    imports: [CommonModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDialogTitle,
+        MatDialogContent,
+        MatDialogActions,
+        MatButtonModule],
+    templateUrl: './dialog-box.component.html',
+    styleUrl: './dialog-box.component.css'
 })
 export class DialogBoxComponent implements AfterViewInit {
   @ViewChild('formContainer') formContainer!: ElementRef;

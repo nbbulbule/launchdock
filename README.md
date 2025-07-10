@@ -268,6 +268,25 @@ Icons and emoji provided by:
 [Heroicons](https://heroicons.com/)
 
 ---
+## Upgrade Angular version notes
+
+- 1 Check current version compatibility
+```bash```
+npx ng update
+- 2 Version by Version (like 17-> 18->19 -> 20, repeate multiple times for each versio nupgrade)
+```bash```
+npx ng update @angular/cli@18 @angular/core@18 @angular/cdk@18 @angular/material@18 --force
+- 3 After update
+```bash```
+npm install
+- 4 Save and test app
+```bash```
+npm run start
+or 
+```bash```
+ng serve
+
+---
 
 ## 🧠 Fun Fact
 Built to reduce bookmark clutter and improve productivity by centralizing the launch of all your important tools ✨

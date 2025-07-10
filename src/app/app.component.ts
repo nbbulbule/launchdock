@@ -13,17 +13,16 @@ const SHORT_TAB_STORAGE_KEY = 'shortTabData';
 const MY_LIST_STORAGE_KEY = 'myListData';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    CommonModule,
-    LayoutModule,
-    ShortTabComponent,
-    MyListComponent,
-    GoogleServiceComponent
-  ],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    imports: [
+        CommonModule,
+        LayoutModule,
+        ShortTabComponent,
+        MyListComponent,
+        GoogleServiceComponent
+    ],
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
   title: string = "";

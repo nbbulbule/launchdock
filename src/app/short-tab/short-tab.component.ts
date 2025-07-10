@@ -18,15 +18,14 @@ interface Tab {
 }
 
 @Component({
-  selector: 'app-short-tab',
-  standalone: true, // Mark component as standalone
-  imports: [
-    CommonModule, // Required for common directives like *ngIf, *ngFor
-    FormsModule,  // Required for prompt/input handling (implicitly used by `prompt`)
-    DragDropModule // Required for CdkDragDrop
-  ],
-  templateUrl: './short-tab.component.html',
-  styleUrls: ['./short-tab.component.css']
+    selector: 'app-short-tab', // Mark component as standalone
+    imports: [
+        CommonModule, // Required for common directives like *ngIf, *ngFor
+        FormsModule, // Required for prompt/input handling (implicitly used by `prompt`)
+        DragDropModule // Required for CdkDragDrop
+    ],
+    templateUrl: './short-tab.component.html',
+    styleUrls: ['./short-tab.component.css']
 })
 export class ShortTabComponent implements OnInit {
   tabs: Tab[] = [];
