@@ -1,21 +1,12 @@
-<h2 class="dialog-heading" mat-dialog-title>More Information (Notes)</h2>
- <p class="dialog-sub-heading">{{itemName}}</p>
-  
+<h2 class="dialog-heading" style="color:black;">More Information (Notes)</h2>
+<p class="dialog-sub-heading">{{itemName}}</p>
 
-<mat-dialog-content class="dialog-content">
-  <form>
-    <!-- <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Name</mat-label>
-      <input matInput [(ngModel)]="formData.name" name="name" />
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="full-width">
-      <mat-label>Email</mat-label>
-      <input matInput type="email" [(ngModel)]="formData.email" name="email" />
-    </mat-form-field> -->
-    <mat-form-field appearance="fill" class="full-width">
-      <!-- <mat-label>Description</mat-label> -->
-      <textarea class="text-aread-custom" matInput [rows]="rowsTxtArea" [(ngModel)]="infoDetails" name="description" ></textarea>
+<mat-dialog-content class="dialog-content" #formContainer>
+  <form class="form-flex" style=" border-style: outset;">
+    <mat-form-field appearance="fill" class="full-width grow-textarea">
+      <label for="description" class="textarea-label">Notes</label>
+      <textarea matInput [rows]="rowsTxtArea" [(ngModel)]="infoDetails" name="description"
+        class="textarea-fill"></textarea>
     </mat-form-field>
   </form>
 </mat-dialog-content>

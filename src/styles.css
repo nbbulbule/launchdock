@@ -11,3 +11,48 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+/* Optional: style inner elements */
+.light-dialog .mat-mdc-dialog-surface {
+  background-color: white !important;
+  color: black !important;
+}
+
+/* Apply light theme override only in this dialog */
+.light-dialog {
+  --mdc-theme-surface: #ffffff;
+  --mdc-theme-on-surface: #000000;
+  --mdc-filled-text-field-container-color: #fff;
+  --mdc-filled-text-field-input-text-color: #000;
+  --mdc-filled-text-field-label-text-color: #666;
+  --mdc-filled-text-field-hover-label-text-color: #000;
+  --mat-option-hover-state-layer-color: rgba(0,0,0,0.04);
+  --mdc-theme-primary: #1976d2; /* Default primary blue */
+  background-color: white;
+  color: black;
+}
+
+/* Fix for textarea, buttons, etc. */
+.light-dialog .mat-mdc-form-field,
+.light-dialog .mat-mdc-form-field-infix,
+.light-dialog .mat-mdc-text-field-wrapper,
+.light-dialog .mat-mdc-input-element,
+.light-dialog textarea {
+  background-color: white !important;
+  color: black !important;
+}
+
+/* Fix cancel button visibility */
+.light-dialog button.mat-mdc-button {
+  color: #1976d2 !important;
+}
+
+/* Fix flat button appearance (save) */
+.light-dialog button.mat-mdc-button.mat-primary,
+.light-dialog button.mat-mdc-raised-button.mat-primary,
+.light-dialog button.mat-mdc-unelevated-button.mat-primary {
+  background-color: #1976d2 !important;
+  color: white !important;
+}
