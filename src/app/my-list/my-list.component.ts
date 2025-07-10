@@ -7,8 +7,8 @@ import {
 import { CommonModule } from '@angular/common'; // For *ngIf, *ngFor
 import { FormsModule } from '@angular/forms'; // For prompt input
 import { MatDialog } from '@angular/material/dialog';
-import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { IndexedDBService } from '../services/indexdb.service';
+import { FullTextEditorComponent } from '../full-text-editor/full-text-editor.component';
 
 // Interface for a single item within a category
 interface CategoryItem {
@@ -49,16 +49,17 @@ export class MyListComponent implements OnInit {
     // Load categories data from local storage on initialization
     this.loadCategories();
   }
-
-  openEditInfoDialog(item: CategoryItem) {
+ 
+   openEditInfoDialog(item: CategoryItem) {
     if (!item.infoDetails) {
       item.infoDetails = '';
     }
-    const dialogRef = this.dialog.open(DialogBoxComponent, {
-      panelClass: 'light-dialog',
-      width: '1000vw',
+    const dialogRef = this.dialog.open(FullTextEditorComponent, {
+      panelClass: 'light-dialog',      
       data: item,
-      height: '1000vh',
+       width: '100vw',
+      height: '100vh',
+      maxWidth: '100vw'
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {

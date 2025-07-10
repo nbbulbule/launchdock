@@ -285,7 +285,11 @@ npm run start
 or 
 ```bash```
 ng serve
-
+- 5 Bonus: Upgrade other dependencies (optional)
+After Angular upgrade, you can check for any remaining outdated packages:
+```bash```
+npx ng update
+npm outdated
 ---
 
 ## 🧠 Fun Fact

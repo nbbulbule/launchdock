@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogBoxComponent } from './dialog-box.component';
+import { FullTextEditorComponent } from './full-text-editor.component';
 
-describe('DialogBoxComponent', () => {
-  let component: DialogBoxComponent;
-  let fixture: ComponentFixture<DialogBoxComponent>;
+describe('FullTextEditorComponent', () => {
+  let component: FullTextEditorComponent;
+  let fixture: ComponentFixture<FullTextEditorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DialogBoxComponent]
+      imports: [FullTextEditorComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(DialogBoxComponent);
+
+    fixture = TestBed.createComponent(FullTextEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
