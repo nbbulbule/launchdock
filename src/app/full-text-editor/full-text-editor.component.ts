@@ -68,9 +68,7 @@ export class FullTextEditorComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    // Decrypt infoDetails when the dialog initializes
-    if (this.oldData) {
-      const config = this.configService.getConfig();
+    const config = this.configService.getConfig();
       if (config && config.masterpasswordforEncryption) {
         this.masterPassword = config.masterpasswordforEncryption;
       } else {
@@ -80,6 +78,8 @@ export class FullTextEditorComponent implements OnInit {
         // Fallback if config isn't loaded or URL is missing
         this.masterPassword = '';
       }
+    // Decrypt infoDetails when the dialog initializes
+    if (this.oldData) {      
       if (typeof this.oldData !== 'string') {
         // It's an EncryptedData object
         try {
