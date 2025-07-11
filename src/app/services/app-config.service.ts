@@ -8,6 +8,7 @@ export interface AppConfig {
   tagline?: string;
   googleCalendarURL?: string;
   exportFileName?: string;
+  masterpasswordforEncryption?:string
   // Add other properties defined in app-settings.json here
 }
 
@@ -38,7 +39,8 @@ export class ConfigService {
           appName: 'App Name',
           tagline: 'Tagline',
           googleCalendarURL: '',
-          exportFileName:"launchdock-data"
+          exportFileName:"launchdock-data",
+          masterpasswordforEncryption:"password1234safe"
         };
         // Re-throw or return rejected promise if fatal
         throw error;

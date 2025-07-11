@@ -120,6 +120,79 @@ Follow article [Click here](https://infolink.hashnode.dev/steps-to-convert-an-an
 
 ---
 
+## LaunchDock Security & Data Privacy
+LaunchDock is designed as a client-side browser extension with a strong focus on local data security and user privacy.
+
+### How LaunchDock is Secured:
+#### Client-Side Encryption for Sensitive Notes:
+
+- The infoDetails field (where you can store notes) is encrypted using AES-GCM (256-bit) directly within your browser. This means your sensitive notes are scrambled before they are saved.
+
+- An encryption key is securely generated from your master password using PBKDF2, ensuring your actual password is never stored. Each encryption uses unique random values (salt and IV) for added security.
+
+#### Secure Local Storage (IndexedDB):
+
+- All your LaunchDock data (categories, links, and encrypted notes) is stored locally in your browser's IndexedDB.
+
+- This data is protected by the browser's Same-Origin Policy, meaning:
+
+- No other websites you visit can access your LaunchDock data.
+
+- No other browser extensions can access your LaunchDock data.
+
+#### Modern Browser Extension Security (Manifest V3):
+
+- LaunchDock adheres to the latest browser extension security standards. It operates in an isolated environment, separate from regular web pages.
+
+- It requests minimal permissions from your browser, only what's absolutely necessary for its functionality.
+
+- A strict Content Security Policy (CSP) is enforced, preventing the execution of unauthorized scripts and mitigating common web attacks like Cross-Site Scripting (XSS).
+
+#### Input Validation: User-provided links are validated to ensure they are properly formatted web URLs, reducing risks from malformed inputs.
+
+#### No Server-Side Component: LaunchDock is entirely client-side. There is no external server storing your data, which eliminates a common target for data breaches.
+
+### Important Notes for Users: What to Do & What Not to Do
+#### YOUR MASTER PASSWORD IS CRITICAL:
+Note: Master password saved in assets/appsettings. Please choose any password as per your need
+
+- **DO:** Choose a strong, unique master password and remember it.
+
+- **DO NOT:** Forget your master password. If lost, your encrypted infoDetails data will be permanently and irrecoverably lost. There is no "reset password" or recovery mechanism.
+
+- **DO NOT:** Share your master password with anyone.
+
+#### Data is Local & Partially Encrypted:
+
+- **DO:** Understand that while your infoDetails are encrypted by the app, the rest of your data (category names, links) is stored locally in plain text. The entire IndexedDB database file on your computer is protected by your operating system's security, but not by application-level encryption.
+
+- **DO NOT:** Store highly sensitive personal information (e.g., bank details, full passwords for other services) in any part of LaunchDock, especially not in unencrypted fields.
+
+#### Exercise Caution with Imports:
+
+- **DO:** Only import data files (.json) from trusted sources.
+
+- **DO NOT:** Import files from unknown or suspicious origins, as they could potentially contain malicious or malformed data that might affect your application.
+
+#### Be Mindful of Links:
+
+- **DO:** Use LaunchDock to conveniently access your trusted websites.
+
+- **DO NOT:** Click on links to suspicious or untrusted websites, as LaunchDock simply opens the URL you provide. Standard internet safety practices apply.
+
+### General Security Considerations (Beyond LaunchDock's Control):
+Even with strong application-level security, your overall digital security can be compromised by external factors:
+
+- **Compromised Device:** If your computer or browser profile is compromised by malware, viruses, or unauthorized physical access, any data on your device (including your IndexedDB data, encrypted or not) could potentially be at risk.
+
+- **Phishing/Social Engineering:** Attackers might try to trick you into revealing your master password or other sensitive information through fake websites, emails, or messages.
+
+- **Weak Browser Security:** Ensure your web browser is always up-to-date to benefit from the latest security patches.
+
+- **Sharing Credentials:** If you use the same master password for LaunchDock as for other services, a breach on another service could expose your LaunchDock data if an attacker gains access to your device.
+
+---
+
 ## Steps to Google Services Integration (Calendar & Tasks):
 
 This section of the application provides dedicated tabs for integrating Google Calendar and Google Tasks. Due to Google's security policies and the nature of embedding, direct full integration requires specific steps or API usage.

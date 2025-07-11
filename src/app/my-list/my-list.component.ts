@@ -179,7 +179,7 @@ export class MyListComponent implements OnInit {
    * Adds a new item to the specified category after prompting for name and link.
    * @param category The category to add the item to.
    */
-  addItemToCategory(category: Category) {
+  async  addItemToCategory(category: Category) {
     const name = prompt('Enter item name:');
     if (!name || name.trim() === '') return;
 
@@ -216,7 +216,7 @@ export class MyListComponent implements OnInit {
    * @param category The category the item belongs to.
    * @param itemToEdit The item object to edit.
    */
-  editItem(category: Category, itemToEdit: CategoryItem) {
+  async editItem(category: Category, itemToEdit: CategoryItem) {
     const newName = prompt('Edit item name:', itemToEdit.name);
     let newLink = prompt('Edit item link:', itemToEdit.link);
 
