@@ -44,7 +44,7 @@ Follow article [Click here](https://infolink.hashnode.dev/steps-to-convert-an-an
 
 ## 🛠️ Tech Stack
 
-- **Angular 17+**
+- **Angular 20**
 - **Angular CDK DragDrop** for drag-and-drop functionality
 - **HTML & SCSS** for styling
 - **IndexDB** for persistent more data
