@@ -76,7 +76,7 @@ src/
 
 | Tabs & Shortcuts | Settings Menu | Notes/Info Popup  |
 |------------------|---------------|--------------|
-| ![tabs](screenshots/image.png) | ![settings](screenshots/settings.jpg) | ![Notes Add](screenshots/more_info_popup.jpg) 
+| ![tabs](screenshots/tabs_shortcuts.jpg) | ![settings](screenshots/settings.jpg) | ![Notes Add](screenshots/more_info_popup.jpg) 
 
 ---
 
