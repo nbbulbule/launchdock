@@ -112,15 +112,7 @@ Follow article [Click here](https://infolink.hashnode.dev/steps-to-convert-an-an
 
 ---
 
-
-## ✨ Customization
-- To add more setting options (like font size, theme, etc.), extend the settings dropdown.
-
-- To persist user profiles, integrate with Firebase Auth or your preferred auth system.
-
----
-
-## LaunchDock Security & Data Privacy
+## 🛡️🔐 LaunchDock Security & Data Privacy
 LaunchDock is designed as a client-side browser extension with a strong focus on local data security and user privacy.
 
 ### How LaunchDock is Secured:
