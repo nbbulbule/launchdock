@@ -47,8 +47,10 @@ Follow article [Click here](https://infolink.hashnode.dev/steps-to-convert-an-an
 - **Angular 17+**
 - **Angular CDK DragDrop** for drag-and-drop functionality
 - **HTML & SCSS** for styling
-- **Local Storage** for persistent data
+- **IndexDB** for persistent more data
 - **Responsive Design** – usable on desktop and mobile
+- **Quill Rich text editor** - for save more information as notes
+- **Encryption** - To secure your data
 
 ---
 
