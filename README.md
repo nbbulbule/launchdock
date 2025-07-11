@@ -44,11 +44,13 @@ Follow article [Click here](https://infolink.hashnode.dev/steps-to-convert-an-an
 
 ## 🛠️ Tech Stack
 
-- **Angular 17+**
+- **Angular 20**
 - **Angular CDK DragDrop** for drag-and-drop functionality
 - **HTML & SCSS** for styling
-- **Local Storage** for persistent data
+- **IndexDB** for persistent more data
 - **Responsive Design** – usable on desktop and mobile
+- **Quill Rich text editor** - for save more information as notes
+- **Encryption** - To secure your data
 
 ---
 
@@ -76,7 +78,7 @@ src/
 
 | Tabs & Shortcuts | Settings Menu | Notes/Info Popup  |
 |------------------|---------------|--------------|
-| ![tabs](screenshots/image.png) | ![settings](screenshots/settings.jpg) | ![Notes Add](screenshots/more_info_popup.jpg) 
+| ![tabs](screenshots/tabs_shortcuts.jpg) | ![settings](screenshots/settings.jpg) | ![Notes Add](screenshots/more_info_popup.jpg) 
 
 ---
 
